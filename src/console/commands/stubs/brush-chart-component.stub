@@ -1,0 +1,58 @@
+<?php
+
+namespace {{ namespace }};
+
+use LarawireGarage\LarapexLivewire\LivewireBrushChartComponent;
+use LarawireGarage\LarapexLivewire\Wireable\WireableAreaChart;
+use LarawireGarage\LarapexLivewire\Wireable\WireableBarChart;
+
+class {{ class }} extends LivewireBrushChartComponent
+{
+    protected $listeners = [];
+
+    protected function dataSource($max = 20)
+    {
+        // Dataset logic
+        return array_map(fn ($value) => ['x' => $value, 'y' => rand(1, 100)], range(1, $max));
+    }
+
+    protected function feedData()
+    {
+        $feed1 = $this->dataSource();
+        $feed2 = $this->dataSource();
+
+        /** @var WireableBarChart $mainChart */
+        $this->mainChart->addBar('sample-1', array_column($feed1, 'y'));
+        $this->mainChart->addBar('sample-2', array_column($feed2, 'y'));
+
+        /** @var WireableAreaChart $subChart */
+        $this->subChart->addArea('sample-1', $feed1);
+        $this->subChart->addArea('sample-2', $feed2);
+
+        // set categories
+        $this->mainChart->xAxis(array_column($feed1, 'x'));
+        $this->subChart->xAxis(array_column($feed1, 'x'));
+
+        // set selection
+        $this->setSelectionType('x')
+            ->setSelectionMin(5)
+            ->setSelectionMax(20);
+    }
+
+    protected function buildMainChart()
+    {
+        // choose any chart
+        return (new WireableBarChart($this->sub_chart_id))
+            ->showDataLabels(false)
+            ->randomColors(5);
+    }
+
+    protected function buildSubChart()
+    {
+        // choose any chart
+        $chart = (new WireableAreaChart($this->main_chart_id))
+            ->showDataLabels(false)
+            ->randomColors(5);
+        return $chart;
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "name": "larawire-garage/larapex-livewire",
+    "description": "Laravel wrapper for Apex charts Js advanced charts with livewire",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "LarawireGarage\\LarapexLivewire\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LarawireGarage\\LarapexLivewire\\LarapexLivewireServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Nirmal Pradeepa",
+            "email": "88931913+LarawireGarage@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

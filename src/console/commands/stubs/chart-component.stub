@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use LarawireGarage\LarapexLivewire\Wireable\{{ chart }};
+use LarawireGarage\LarapexLivewire\LivewireChartComponent;
+
+class {{ class }} extends LivewireChartComponent
+{
+    protected $listeners = [];
+
+    private function getData(){
+        // Dataset logic
+        return array_map(fn ($value) => [$value, rand(1, 100)], range(1, 20));
+    }
+
+    public function build()
+    {
+        $this->chart = (new {{ chart }}($this->chart_id)) // ->id($this->chart_id)
+            ->addArea('sample-1', $this->getData())
+            ->addArea('sample-2', $this->getData())
+            ->showDataLabels(false)
+            ->randomColors();
+    }
+}
