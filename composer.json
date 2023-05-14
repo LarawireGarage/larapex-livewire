@@ -1,6 +1,6 @@
 {
     "name": "larawire-garage/larapex-livewire",
-    "description": "Laravel wrapper for Apex charts Js advanced charts with livewire",
+    "description": "Laravel wrapper for ApexCharts javascript plugin advanced features with livewire",
     "license": "MIT",
     "autoload": {
         "psr-4": {
