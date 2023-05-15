@@ -2,8 +2,8 @@
     <div id="{!! $chart_id !!}" class="m-0"></div>
 </div>
 
-@if (!empty(config('larapex-charts.script_section', '')))
-    @push(config('larapex-charts.script_section'))
+@if (!empty(config('larapex-livewire.script_section', '')))
+    @push(config('larapex-livewire.script_section'))
         <script>
             // component scripts
             document.addEventListener("DOMContentLoaded", () => {

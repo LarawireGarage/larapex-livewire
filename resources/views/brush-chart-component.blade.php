@@ -5,8 +5,8 @@
     </div>
 </div>
 
-@if (!empty(config('larapex-charts.script_section', '')))
-    @push(config('larapex-charts.script_section'))
+@if (!empty(config('larapex-livewire.script_section', '')))
+    @push(config('larapex-livewire.script_section'))
         <script>
             window.initApexChart(
                 document.querySelector("#{{ $sub_chart_id }}"),
