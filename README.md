@@ -1,5 +1,6 @@
 # Larapex Livewire
 Laravel wrapper for [ApexCharts javascript plugin](https://apexcharts.com/) advanced features with livewire
+### Support Livewire 3
 
 **Installation**
 ```
