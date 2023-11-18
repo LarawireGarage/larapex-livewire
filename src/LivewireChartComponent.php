@@ -24,21 +24,24 @@ abstract class LivewireChartComponent extends Component
 
     abstract public function build();
 
-    #[On('update:options')]
-    public function changeOptions()
+    #[On('update:chart')]
+    public function updateChart(...$params)
     {
-        dd('in change options method');
-        $this->build();
-        $this->options = $this->chart->getOptionsAsJson();
+        if (is_array($params[0])) {
+            $this->hydrateInstanceProperties($params[0]);
+            return;
+        }
 
-        return $this->dispatch(
-            'apex:chart:update:options',
-            chart: $this->chart,
-            options: $this->options,
-            redraw: $this->redraw ?? false,
-            animate: $this->animate ?? false,
-            updateSyncCharts: $this->updateSyncCharts ?? false,
-        )->self();
+        $this->hydrateInstanceProperties($params);
+    }
+
+    private function hydrateInstanceProperties(array $properties = [])
+    {
+        array_walk($properties, function (&$value, $key) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            };
+        });
     }
 
     public function render()

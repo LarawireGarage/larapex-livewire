@@ -31,14 +31,15 @@ class LarapexBladeDirectives
 
     protected function getPluginScript(bool $withCDN = false)
     {
-        $jsChartCDN = <<<HTML
-                            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-                        HTML;
-
-        $jsChartLocal = <<<HTML
+        if (!$withCDN && file_exists(public_path('vendor\larapex-livewire\apexcharts.js'))) {
+            return <<<HTML
                         <script src="{{ asset('vendor/larapex-livewire/apexcharts.js') }}"></script>
                     HTML;
-        return !$withCDN && file_exists(public_path('vendor\larapex-livewire\apexcharts.js')) ? $jsChartLocal : $jsChartCDN;
+        }
+
+        return <<<HTML
+                    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                HTML;
     }
     protected function getScripts()
     {
@@ -51,7 +52,8 @@ class LarapexBladeDirectives
                     <script src="{{ asset('vendor/larapex-livewire/larapexScripts.js') }}"></script>
                     <script src="{{ asset('vendor/larapex-livewire/larapexLivewireEventListeners.js') }}"></script>
                 HTML;
-        else $tags = <<<HTML
+        else
+            $tags = <<<HTML
                         <script src="{{ asset('vendor/larapex-livewire/larapexScripts.js') }}"></script>
                     HTML;
         return $tags;
@@ -79,7 +81,7 @@ class LarapexBladeDirectives
     }
     private function isLocalEssentialScriptExists()
     {
-        return file_exists(public_path('vendor\larapex-livewire\apexcharts.js'));
+        return file_exists(public_path('vendor\larapex-livewire\larapexScripts.js'));
     }
     private function isLocalLivewireListenersScriptExists()
     {

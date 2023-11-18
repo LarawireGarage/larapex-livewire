@@ -49,11 +49,6 @@
                 "{{ $chart_code }}",
                 {!! $chart->getOptionsAsJson() !!}
             );
-            document.addEventListener('livewire:initialized', () => {
-                @this.on('apex:chart:update:options', (event) => {
-                    console.log('new apex:chart:update:options in script section', event)
-                });
-            });
         </script>
     @endpush
 @else
