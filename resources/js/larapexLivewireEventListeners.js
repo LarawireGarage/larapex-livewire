@@ -1,4 +1,5 @@
 window.addEventListener('apex:chart:update:options', function (e) {
+    console.log('old apex:chart:update:options event listener', e);
     if (typeof window['updateLarapexChartOptions'] === 'function') {
         let code = e.detail.chart_code ?? null;
         let options = JSON.parse(e.detail.chart_options) ?? null;

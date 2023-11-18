@@ -4,6 +4,7 @@ namespace LarawireGarage\LarapexLivewire;
 
 use Livewire\Component;
 use LarawireGarage\LarapexLivewire\Traits\HasChart;
+use Livewire\Attributes\On;
 
 abstract class LivewireChartComponent extends Component
 {
@@ -22,6 +23,23 @@ abstract class LivewireChartComponent extends Component
     public $options;
 
     abstract public function build();
+
+    #[On('update:options')]
+    public function changeOptions()
+    {
+        dd('in change options method');
+        $this->build();
+        $this->options = $this->chart->getOptionsAsJson();
+
+        return $this->dispatch(
+            'apex:chart:update:options',
+            chart: $this->chart,
+            options: $this->options,
+            redraw: $this->redraw ?? false,
+            animate: $this->animate ?? false,
+            updateSyncCharts: $this->updateSyncCharts ?? false,
+        )->self();
+    }
 
     public function render()
     {
