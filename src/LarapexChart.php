@@ -26,8 +26,8 @@ class LarapexChart implements ChartEssentials
     // public $id_sub; //  for brush type
     // public $type_sub; //  for brush type
     public $chart = [
-        'id' => 'SampleChart',
-        'background' => '#fff0',
+        'id'                   => 'SampleChart',
+        'background'           => '#fff0',
         // 'brush' => [
         //     'enabled' => false,
         // 'target' => 'chart2',
@@ -39,7 +39,7 @@ class LarapexChart implements ChartEssentials
         // 'foreColor' => '',
         // 'group' => 'group1', // only for sync charts
         // 'events' =>, // not needed yet
-        'height' => 300,
+        'height'               => 300,
         // 'offsetX' => 0,
         // 'offsetY' => 0,
         // 'parentHeightOffset' => 15,
@@ -71,7 +71,7 @@ class LarapexChart implements ChartEssentials
         // 'sparkline' => ['enabled' => false],
         // 'stacked' => false,
         // 'stackType' => 'normal',
-        'toolbar' => ['show' => false],
+        'toolbar'              => ['show' => false],
         // 'type' => 'line',
         // 'width' => '100%',
         // 'zoom' => [],
@@ -137,10 +137,10 @@ class LarapexChart implements ChartEssentials
     ];
     /** forecastDataPoints */
     public $forecastDataPoints = [
-        'count' => 0,
+        'count'       => 0,
         'fillOpacity' => 0.5,
         'strokeWidth' => 4,
-        'dashArray' => 4,
+        'dashArray'   => 4,
     ];
     /** @var array $grid */
     public $grid = [
@@ -193,8 +193,8 @@ class LarapexChart implements ChartEssentials
     ];
     /** noData */
     public $noData = [
-        'text' => 'No Data',
-        'align' => 'center',
+        'text'          => 'No Data',
+        'align'         => 'center',
         'verticalAlign' => 'middle',
         // 'offsetX' => 0,
         // 'offsetY' => 0,
@@ -255,7 +255,8 @@ class LarapexChart implements ChartEssentials
     ];
     /** theme */
     public $theme = [
-        'mode' => 'dark', // possible : light, dark
+        'mode' => 'dark',
+        // possible : light, dark
         // 'palette' => 'palette1', // possible : palette1 - palette10
         // 'monochrome' => [
         //     'enabled' => false,
@@ -281,7 +282,7 @@ class LarapexChart implements ChartEssentials
     ];
     /** tooltip */
     public $tooltip = [
-        'enabled' => true,
+        'enabled'        => true,
         // 'enabledOnSeries' => [],
         // 'shared' => true,
         // 'followCursor' => false,
@@ -289,7 +290,7 @@ class LarapexChart implements ChartEssentials
         // 'inverseOrder' => false,
         // 'custom'=> null,
         // 'fillSeriesColor' => false,
-        'theme' => 'dark',
+        'theme'          => 'dark',
         // 'style' => [
         //     'fontSize' => '12px',
         //     'fontFamily' => null
@@ -531,9 +532,9 @@ class LarapexChart implements ChartEssentials
         $this->set('chart', 'foreColor', config('larapex-livewire.font_color'));
         $this->set('chart', 'background', config('larapex-livewire.background_color'));
 
-        if (!empty($options)) $this->fill($options);
+        if (!empty($options))
+            $this->fill($options);
 
-        return $this;
         // $this->set('chart', 'foreColor', 'Nunito');
         // $this->set('chart', 'background', '#ffffff00');
         // $this->set('chart', 'fontFamily', '#ffffff00');
@@ -645,28 +646,28 @@ class LarapexChart implements ChartEssentials
     public function getOptionsAsArray()
     {
         $options = [
-            'chart' => $this->chart,
-            'colors' => $this->colors,
-            'dataLabels' => $this->dataLabels,
-            'fill' => $this->fill,
+            'chart'              => $this->chart,
+            'colors'             => $this->colors,
+            'dataLabels'         => $this->dataLabels,
+            'fill'               => $this->fill,
             'forecastDataPoints' => $this->forecastDataPoints,
-            'grid' => $this->grid,
-            'labels' => $this->labels,
-            'legend' => $this->legend,
-            'markers' => $this->markers,
-            'noData' => $this->noData,
-            'series' => $this->dataset,
-            'states' => $this->states,
-            'stroke' => $this->stroke,
-            'subtitle' => $this->subtitle,
-            'theme' => $this->theme,
-            'title' => $this->title,
-            'tooltip' => $this->tooltip,
-            'plotOptions' => $this->plotOptions,
-            'xaxis' => $this->xAxis,
-            'yaxis' => $this->yAxis,
+            'grid'               => $this->grid,
+            'labels'             => $this->labels,
+            'legend'             => $this->legend,
+            'markers'            => $this->markers,
+            'noData'             => $this->noData,
+            'series'             => $this->dataset,
+            'states'             => $this->states,
+            'stroke'             => $this->stroke,
+            'subtitle'           => $this->subtitle,
+            'theme'              => $this->theme,
+            'title'              => $this->title,
+            'tooltip'            => $this->tooltip,
+            'plotOptions'        => $this->plotOptions,
+            'xaxis'              => $this->xAxis,
+            'yaxis'              => $this->yAxis,
         ];
-        $options = collect($options)->filter(fn ($option) => !empty($option))->all();
+        $options = collect($options)->filter(fn($option) => !empty($option))->all();
         return $options;
     }
 
@@ -700,7 +701,8 @@ class LarapexChart implements ChartEssentials
             if (func_num_args() == 2) {
                 $this->$var = $opt;
             } else {
-                if (!is_array($this->$var)) $this->$var = [];
+                if (!is_array($this->$var))
+                    $this->$var = [];
                 Arr::set($this->$var, $opt, $val);
             }
         }
@@ -1192,7 +1194,7 @@ class LarapexChart implements ChartEssentials
     }
     public function width(string $width = 'auto')
     {
-        $this->set('chart', 'width', is_numeric($width) ? (int)$width : $width);
+        $this->set('chart', 'width', is_numeric($width) ? (int) $width : $width);
         return $this;
     }
     public function sparklineEnable(bool $enable = true)
@@ -1220,7 +1222,7 @@ class LarapexChart implements ChartEssentials
     {
         $colors = collect(config('larapex-livewire.colors'))
             ->shuffle()
-            ->when($limit > 0, fn ($colors) => $colors->chunk($limit)->first())
+            ->when($limit > 0, fn($colors) => $colors->chunk($limit)->first())
             ->all();
         $this->set('colors', $colors);
         return $this;
@@ -1293,11 +1295,15 @@ class LarapexChart implements ChartEssentials
         $this->set('fill', 'colors', $fromColors);
         $this->set('fill', 'opacity', 0.9);
         $ginfo = [
-            'shade' => $shade, // possible : light,dark
-            'type' => $direction, // possible : horizontal, vertical, diagonal1, diagonal2
-            'gradientToColors' => $toColors, // chart.colors OR fill.colors ==> TO ==> fill.gradient.gradientToColors
-            'stops' => $colorStops, // example : [0, 50, 100]
-            'colorStops' => $customStops
+            'shade'            => $shade,
+            // possible : light,dark
+            'type'             => $direction,
+            // possible : horizontal, vertical, diagonal1, diagonal2
+            'gradientToColors' => $toColors,
+            // chart.colors OR fill.colors ==> TO ==> fill.gradient.gradientToColors
+            'stops'            => $colorStops,
+            // example : [0, 50, 100]
+            'colorStops'       => $customStops
             // 'shadeIntensity' => 0.5,
             // 'inverseColors' => true,
             // 'opacityFrom' => 1,
@@ -1365,11 +1371,11 @@ class LarapexChart implements ChartEssentials
         $colors = $colors ?? config('larapex-livewire.colors');
         $info = $this->markers ?? [];
         $customInfo = [
-            'size' => $width,
-            'colors' => $colors,
+            'size'         => $width,
+            'colors'       => $colors,
             'strokeColors' => "#fff",
-            'strokeWidth' => $width / 2,
-            'hover' => [
+            'strokeWidth'  => $width / 2,
+            'hover'        => [
                 'size' => $hoverSize,
             ]
         ];
@@ -1386,8 +1392,8 @@ class LarapexChart implements ChartEssentials
     public function noData($text = 'No Data', string $halign = 'center', string $valign = 'middle', array $others = [])
     {
         $info = [
-            'text' => $text,
-            'align' => $halign,
+            'text'          => $text,
+            'align'         => $halign,
             'verticalAlign' => $valign,
             // 'offsetX' => 0,
             // 'offsetY' => 0,
@@ -1414,10 +1420,10 @@ class LarapexChart implements ChartEssentials
     {
         $colors = !empty($colors) && is_array($colors) ? $colors : config('larapex-livewire.colors');
         $info = [
-            'show'    =>  true,
-            'width'   =>  $width,
-            'colors'  =>  $colors,
-            'curve'   =>  $curve,
+            'show'   => true,
+            'width'  => $width,
+            'colors' => $colors,
+            'curve'  => $curve,
             // 'lineCap' => 'butt',
             // 'dashArray' => 0,
         ];
@@ -1444,8 +1450,9 @@ class LarapexChart implements ChartEssentials
     public function subtitle(string $subtitle, string $position = 'left', array $others = [])
     {
         $info = [
-            'text' => $subtitle,
-            'align' => $position, // subtitlePosition
+            'text'  => $subtitle,
+            'align' => $position,
+            // subtitlePosition
             // 'margin' => 10,
             // 'offsetX' => 0,
             // 'offsetY' => 0,
@@ -1473,7 +1480,8 @@ class LarapexChart implements ChartEssentials
     public function theme(string $mode = 'dark', array $others = [])
     {
         $info = [
-            'mode' => $mode, // possible : light, dark
+            'mode' => $mode,
+            // possible : light, dark
             // 'palette' => 'palette1', // possible : palette1 - palette10
             // 'monochrome' => [
             //     'enabled' => false,
@@ -1497,7 +1505,7 @@ class LarapexChart implements ChartEssentials
     public function title(string $title, string $align = 'left', array $others = [])
     {
         $info = [
-            'text' => $title,
+            'text'  => $title,
             'align' => $align,
             // 'margin' => 10,
             // 'offsetX' => 0,
@@ -1532,8 +1540,8 @@ class LarapexChart implements ChartEssentials
     public function tooltip(bool $show = true, string $theme = 'dark', bool $fillSeriesColor = false, array $others = [])
     {
         $info = [
-            'enabled' => $show,
-            'theme' => $theme,
+            'enabled'         => $show,
+            'theme'           => $theme,
             'fillSeriesColor' => $fillSeriesColor,
             // 'enabledOnSeries' => [],
             // 'shared' => true,
@@ -1545,7 +1553,7 @@ class LarapexChart implements ChartEssentials
             //     'fontSize' => '12px',
             //     'fontFamily' => null
             // ],
-            'onDatasetHover' => [
+            'onDatasetHover'  => [
                 'highlightDataSeries' => false,
             ],
         ];
@@ -1566,7 +1574,7 @@ class LarapexChart implements ChartEssentials
     public function xAxis(array $categories = [], string $type = 'category', string $title = '', array $others = [])
     {
         $info = [
-            'type' => $type,
+            'type'          => $type,
             // 'categories' => $categories,
             // 'tickAmount' => 3,
             'tickPlacement' => 'on',
@@ -1621,7 +1629,7 @@ class LarapexChart implements ChartEssentials
             //     'offsetX' => 0,
             //     'offsetY' => 0
             // ],
-            'title' => [
+            'title'         => [
                 'text' => $title,
                 // 'offsetX' => 0,
                 // 'offsetY' => 0,
@@ -1666,7 +1674,7 @@ class LarapexChart implements ChartEssentials
     public function yAxis(bool $show = true, array $others = [])
     {
         $info = [
-            'show' => $show,
+            'show'       => $show,
             'showAlways' => $show,
             // showForNullSeries: true,
             // seriesName: null,
@@ -1679,7 +1687,7 @@ class LarapexChart implements ChartEssentials
             // forceNiceScale: false,
             // floating: false,
             // decimalsInFloat: null,
-            'labels' => [
+            'labels'     => [
                 'show' => $show,
                 //     align: 'right',
                 //     minWidth: 0,
@@ -1704,7 +1712,7 @@ class LarapexChart implements ChartEssentials
             //     offsetX: 0,
             //     offsetY: 0
             // },
-            'axisTicks' => [
+            'axisTicks'  => [
                 'show' => $show,
                 // borderType: 'solid',
                 // color: '#78909C',
@@ -1734,7 +1742,7 @@ class LarapexChart implements ChartEssentials
             //         dashArray: 0,
             //     },
             // },
-            'tooltip' => [
+            'tooltip'    => [
                 'enabled' => $show,
                 // offsetX: 0,
             ],
@@ -1755,7 +1763,7 @@ class LarapexChart implements ChartEssentials
     {
         $info = [
             'enabled' => $enable,
-            'type' => $type,
+            'type'    => $type,
             // 'autoScaleYaxis' => false,
             // 'zoomedArea' => [
             //     'fill' => [
