@@ -23,7 +23,7 @@ trait HasChart
     public $updateSyncCharts = false;
 
     /** reset params */
-    public $update = false;
+    public $update = true;
     /** reset params */
     public $zoom = true;
 

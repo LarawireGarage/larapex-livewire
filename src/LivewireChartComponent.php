@@ -24,12 +24,12 @@ abstract class LivewireChartComponent extends Component
 
     abstract public function build();
 
-    #[On('update:chart')]
+    #[On('refresh:chart')]
     public function updateChart(...$params)
     {
         $this->hydrateParameters($params);
     }
-    #[On('update:chart:series')]
+    #[On('update:chart:options')]
     public function updateChartSeries(...$params)
     {
         $this->hydrateParameters($params);
@@ -42,14 +42,16 @@ abstract class LivewireChartComponent extends Component
 
     private function hydrateParameters($parameters = [])
     {
+        if (empty($parameters)) {
+            return;
+        }
+
         if (is_array($parameters[0])) {
             $this->hydrateInstanceProperties($parameters[0]);
-            // $this->dispatch('larapex-chart-update');
             return;
         }
 
         $this->hydrateInstanceProperties($parameters);
-        // $this->dispatch('larapex-chart-update');
     }
     private function hydrateInstanceProperties(array $properties = [])
     {

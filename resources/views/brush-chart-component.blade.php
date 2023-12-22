@@ -5,12 +5,16 @@
     mainchart: null,
     main_id: @entangle('main_chart_id'),
     main_code: @entangle('main_chart_code'),
-    options_main: @entangle('main_options').live,
+    options_main: @entangle('main_options'),
+    isResetMain: false,
+    isDestroyMain: false,
 
     subchart: null,
     sub_id: @entangle('sub_chart_id'),
-    sub_code: @entangle('sub_chart_code'), 
-    options_sub: @entangle('sub_options').live,
+    sub_code: @entangle('sub_chart_code'),
+    options_sub: @entangle('sub_options'),
+    isResetSub: false,
+    isDestroySub: false,
 
     redraw: @entangle('redraw'),
     animate: @entangle('animate'),
@@ -20,17 +24,18 @@
 
     initChart() {
         console.log('init chart');
-        this.mainchart = new ApexCharts($refs.chartElemMain, this.options_main);
-        this.mainchart.render();
+        if (this.subchart == null) {
+            this.subchart = new ApexCharts($refs.chartElemSub, this.options_sub);
+            this.subchart.render();
+        }
+        if (this.mainchart == null) {
+            this.mainchart = new ApexCharts($refs.chartElemMain, this.options_main);
+            this.mainchart.render();
+        }
 
-        this.subchart = new ApexCharts($refs.chartElemSub, this.options_sub);
-        this.subchart.render();
     },
     updateOptions() {
         console.log('update chart');
-        console.log('main : ', Object.keys(this.options_main));
-        console.log('sub : ', Object.keys(this.options_sub));
-
         if (this.mainchart !== null && Object.keys(this.options_main).length > 0) {
             this.mainchart.updateOptions(
                 this.options_main,
@@ -50,13 +55,20 @@
     },
     updateSeries() {
         console.log('update series');
-        console.log(Object.keys(this.options_main.series));
+        this.updateMainSeries();
+        this.updateSubSeries();
+    },
+    updateMainSeries() {
+        console.log('main series : ', this.options_main.series);
         if (this.mainchart !== null && Object.keys(this.options_main).length > 0) {
             this.mainchart.updateSeries(
                 this.options_main.series,
                 this.animate
             );
         }
+    },
+    updateSubSeries() {
+        console.log('sub series : ', this.options_sub.series);
         if (this.subchart !== null && Object.keys(this.options_sub).length > 0) {
             this.subchart.updateSeries(
                 this.options_sub.series,
@@ -66,23 +78,49 @@
     },
     resetChart() {
         console.log('reset chart');
-        if (this.mainchart !== null) this.mainchart.updateSeries(
+        this.resetMainChart();
+        this.resetSubChart();
+    },
+    resetMainChart() {
+        if (this.mainchart !== null) this.mainchart.resetSeries(
             this.update,
             this.zoom
         );
-        if (this.subchart !== null) this.subchart.updateSeries(
+        this.isResetMain = true;
+    },
+    resetSubChart() {
+        if (this.subchart !== null) this.subchart.resetSeries(
             this.update,
             this.zoom
         );
+        this.isResetSub = true;
     },
     destroyChart() {
         console.log('destroy chart');
-        if (this.mainchart !== null) this.mainchart.destroy();
-        if (this.subchart !== null) this.subchart.destroy();
+        if (this.mainchart !== null) {
+            this.mainchart.destroy();
+            this.isDestroyMain = true;
+        }
+        if (this.subchart !== null) {
+            this.subchart.destroy();
+            this.isDestroySub = true;
+        }
     }
 }" x-id="['apex_chart_brush','apex_chart_brush_main','apex_chart_brush_sub']"
-    x-init="initChart()" x-on:update:chart="updateOptions" x-on:update:chart:series="updateSeries"
-    x-on:reset:chart="resetChart" wire:ignore>
+    x-init="initChart();
+    $watch('options_main', (newOptions) => {
+        if (mainchart && (isResetMain !== true) && (isDestroyMain !== true) && JSON.stringify(mainchart.opts) !== JSON.stringify(newOptions)) {
+            updateMainSeries();
+        }
+        isResetMain = true;
+    });
+    $watch('options_sub', (newOptions) => {
+        if (subchart && (isResetSub !== true) && (isDestroySub !== true) && JSON.stringify(subchart.opts) !== JSON.stringify(newOptions)) {
+            updateSubSeries();
+        }
+        isResetSub = true;
+    });" x-on:update:chart:options="updateOptions" x-on:reset:chart="resetChart"
+    x-on:delete:chart="destroyChart" wire:ignore>
     <div :class="'apex-brush-wrapper-' + id">
         <div :id="$id('apex_chart_brush_sub')" x-ref="chartElemSub" style="position: relative; margin-top: -38px;"></div>
         <div :id="$id('apex_chart_brush_main')" x-ref="chartElemMain"></div>

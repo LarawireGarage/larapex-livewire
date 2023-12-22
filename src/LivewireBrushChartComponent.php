@@ -51,7 +51,7 @@ abstract class LivewireBrushChartComponent extends Component
     /** @var string|null $selectionMax */
     protected $selectionMax;
 
-    #[On('update:chart')]
+    #[On('refresh:chart')]
     public function updateChart(...$params)
     {
         $this->hydrateParameters($params);
@@ -158,10 +158,10 @@ abstract class LivewireBrushChartComponent extends Component
         $this->extractOptions();
 
         return view('larapex-livewire::brush-chart-component', [
-            'brushChart'       => $this->brushChart,
-            'redraw'           => $this->redraw ?? false,
-            'animate'          => $this->animate ?? false,
-            'updateSyncCharts' => $this->updateSyncCharts ?? false,
+            // 'brushChart'       => $this->brushChart,
+            // 'redraw'           => $this->redraw ?? false,
+            // 'animate'          => $this->animate ?? false,
+            // 'updateSyncCharts' => $this->updateSyncCharts ?? false,
         ]);
     }
 }
