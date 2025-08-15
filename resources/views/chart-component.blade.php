@@ -52,9 +52,7 @@
         this.options.tooltip.theme = theme;
         this.options.theme.mode = theme;
         this.options.chart.foreColor = this.themes[theme]['font_color'];
-        this.options.chart.background = this.themes[theme]['background_color'];
-
-        console.log(this.options);
+        this.options.chart.background = this.themes[theme]['background_color']; 
     },
     updateChartOptions() {
         this.handleTheme();
