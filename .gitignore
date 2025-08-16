@@ -3,3 +3,4 @@ node_modules/
 
 resources/views/old
 resources/js/testScripts.js
+/.idea/

@@ -7,10 +7,14 @@ namespace LarawireGarage\LarapexLivewire\Traits;
  */
 trait ComplexChartDataAddable
 {
-    public function addData(string $name, array $data)
+    public function addData(string $name, array $data, ?string $type = null)
     {
         $dataset = $this->getDataset();
-        $dataset[] = ['name' => $name, 'data' => $data];
+        $values = ['name' => $name, 'data' => $data];
+        if ($type) {
+            $values['type'] = $type;
+        }
+        $dataset[] = $values;
         $this->set('dataset', $dataset);
         return $this;
     }

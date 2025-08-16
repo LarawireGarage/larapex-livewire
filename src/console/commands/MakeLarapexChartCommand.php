@@ -25,17 +25,26 @@ class MakeLarapexChartCommand extends GeneratorCommand
     protected $description = 'Make a Larapex Livewire Chart';
 
     protected $chartTypes = [
-        'Area Chart'  => 'WireableAreaChart',
-        'Bar Chart'   => 'WireableBarChart',
-        'Brush Chart' => 'WireableBrushChart',
-        'Donut Chart' => 'WireableDonutChart',
-        'Line Chart'  => 'WireableLineChart',
-        'Pie Chart'   => 'WireablePieChart',
-        // 'Radial Bar Chart'      => 'WireableRadialBarChart', // not available yet
-        // 'Polar Area Chart'      => 'WireablePolarAreaChart', // not available yet
+        'Area Chart'                    => 'WireableAreaChart',
+        'Bar Chart'                     => 'WireableBarChart',
+        'Brush Chart'                   => 'WireableBrushChart',
+        'Donut Chart'                   => 'WireableDonutChart',
+        'Line Chart'                    => 'WireableLineChart',
+        'Pie Chart'                     => 'WireablePieChart',
+        'Mixed Multi Y-Axis Chart'      => 'WireableMixedMultiAxisChart',
+        'Mixed Line Column Area Chart'  => 'WireableMixedLineColumnAreaChart',
+        // 'Column Chart'          => 'WireableColumnChart',        // not available yet
+        // 'Box Plot Chart'        => 'WireableBoxPlotChart',       // not available yet
+        // 'Candlestick Chart'     => 'WireableCandlesticChart',    // not available yet
+        // 'Range Bar Chart'       => 'WireableRangeBarChart',      // not available yet
+        // 'Range Area Chart'      => 'WireableRangeAreaChart',     // not available yet
+        // 'Treemap Chart'         => 'WireableTreemapChart',       // not available yet
+        // 'Funnel Chart'          => 'WireableFunnelChart',        // not available yet
+        // 'Radial Bar Chart'      => 'WireableRadialBarChart',     // not available yet
+        // 'Polar Area Chart'      => 'WireablePolarAreaChart',     // not available yet
         // 'Horizontal Bar Chart'  => 'WireableHorizontalBarChart', // not available yet
-        // 'Heatmap Chart'         => 'WireableHeatMapChart', // not available yet
-        // 'Radar Chart'           => 'WireableRadarChart', // not available yet
+        // 'Heatmap Chart'         => 'WireableHeatMapChart',       // not available yet
+        // 'Radar Chart'           => 'WireableRadarChart',         // not available yet
     ];
 
     protected $selectedChart;
@@ -142,6 +151,8 @@ class MakeLarapexChartCommand extends GeneratorCommand
             'WireableDonutChart' => __DIR__ . '/stubs/donut-chart-component.stub',
             'WireableLineChart' => __DIR__ . '/stubs/line-chart-component.stub',
             'WireablePieChart' => __DIR__ . '/stubs/pie-chart-component.stub',
+            'WireableMixedMultiAxisChart' => __DIR__ . '/stubs/mixed-multi-axis-chart-component.stub',
+            'WireableMixedLineColumnAreaChart' => __DIR__ . '/stubs/mixed-line-column-area-chart-component.stub',
         };
     }
 
